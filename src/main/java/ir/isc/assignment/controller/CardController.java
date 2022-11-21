@@ -3,17 +3,17 @@ package ir.isc.assignment.controller;
 import ir.isc.assignment.model.Card;
 import ir.isc.assignment.service.CardService;
 import ir.isc.assignment.service.CustomerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("api/card")
 public class CardController {
-
+    private static final Logger logger = LoggerFactory.getLogger(CardController.class);
     @Autowired
     CardService cardService;
 
@@ -23,8 +23,10 @@ public class CardController {
     @GetMapping("/get")
     private ResponseEntity<?> getCard(@RequestParam String cardNumber) {
         try {
+
             return ResponseEntity.status(HttpStatus.OK).body(cardService.getCard(cardNumber));
         } catch (Exception e) {
+            logger.warn("salam mohsen");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("card number is not valid");
         }
     }
