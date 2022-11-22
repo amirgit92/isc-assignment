@@ -6,11 +6,11 @@ import ir.isc.assignment.reopsitory.CardRepository;
 import ir.isc.assignment.reopsitory.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class CustomerServiceImp implements CustomerService {
-
     @Autowired
     CustomerRepository customerRepository;
     @Autowired

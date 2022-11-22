@@ -15,7 +15,9 @@ public class Issuer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String issuerName;
+    @Column(unique = true)
     private String issuerNumber;
 
     @OneToMany(mappedBy = "issuer")

@@ -17,29 +17,25 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.Random;
 
 @SpringBootApplication
 public class AssignmentApplication {
 
-    //declaring ModelMapper as a bean
-//    @Bean
-//    public ModelMapper modelMapper(){
-//        return new ModelMapper();
-//    }
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(AssignmentApplication.class, args);
-        MemoryUsage memoryUsage = new MemoryUsage("memory usage thread");
-        memoryUsage.start();
+//        MemoryUsage memoryUsage = new MemoryUsage("memory usage thread");
+//        memoryUsage.start();
     }
-
 
     @Bean
     CommandLineRunner run(CardRepository cardRepository, CustomerRepository customerRepository, IssuerRepository issuerRepository) {
         return args -> {
-
-//            Customer customer1 = new
-//                    Customer("1450253698", "amir", "babazadeh", "09371234567", "someWhereOnTheEarth", "125478");
 
             Customer customer1 = Customer.builder()
                     .nationalNumber("1450543197")
@@ -50,10 +46,6 @@ public class AssignmentApplication {
                     .accountNumber("125478")
                     .build();
 
-
-//            Customer customer2 = new
-//                    Customer("0053657894", "mina", "minaei", "09126352418", "anotherWhereOnTheEarth", "968574");
-
             Customer customer2 = Customer.builder()
                     .nationalNumber("0053657894")
                     .firstName("mina")
@@ -63,12 +55,13 @@ public class AssignmentApplication {
                     .accountNumber("968574")
                     .build();
 
-            Issuer issuer1 = new Issuer("melli", "123456");
-            Issuer issuer2 = new Issuer("mellat", "654321");
+            Issuer issuer1 = new Issuer("melli", "111111");
+            Issuer issuer2 = new Issuer("mellat", "222222");
+            Issuer issuer3 = new Issuer("tejarat", "333333");
+            Issuer issuer4 = new Issuer("sepah", "444444");
 
-//            Card card1 = new Card("1234679", CardType.credit, setExpiryDate(), true, customer1, issuer1);
             Card card1 = Card.builder()
-                    .cardNumber("123456789")
+                    .cardNumber("1234561234567890")
                     .cardType(CardType.credit)
                     .expireDate(setExpiryDate())
                     .isActive(true)
@@ -76,9 +69,8 @@ public class AssignmentApplication {
                     .issuer(issuer1)
                     .build();
 
-//            Card card2 = new Card("1452369", CardType.debit, setExpiryDate(), true, customer2, issuer2);
             Card card2 = Card.builder()
-                    .cardNumber("147258369")
+                    .cardNumber("6543219876543210")
                     .cardType(CardType.credit)
                     .expireDate(setExpiryDate())
                     .isActive(true)
@@ -91,6 +83,8 @@ public class AssignmentApplication {
 
             issuerRepository.save(issuer1);
             issuerRepository.save(issuer2);
+            issuerRepository.save(issuer3);
+            issuerRepository.save(issuer4);
 
             cardRepository.save(card1);
             cardRepository.save(card2);
@@ -98,12 +92,12 @@ public class AssignmentApplication {
         };
     }
 
-    private LocalDate setExpiryDate() {
+    private String setExpiryDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy/MM");
         LocalDate currentDate = LocalDate.now();
         //expiry date after 5 years
         LocalDate expiryDate = currentDate.plusYears(5);
-        return expiryDate;
+        return expiryDate.format(formatter);
     }
 
 

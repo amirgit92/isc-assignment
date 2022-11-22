@@ -16,14 +16,11 @@ public class CardController {
     private static final Logger logger = LoggerFactory.getLogger(CardController.class);
     @Autowired
     CardService cardService;
-
     @Autowired
     CustomerService customerService;
-
     @GetMapping("/get")
     private ResponseEntity<?> getCard(@RequestParam String cardNumber) {
         try {
-
             return ResponseEntity.status(HttpStatus.OK).body(cardService.getCard(cardNumber));
         } catch (Exception e) {
             logger.warn("salam mohsen");
@@ -45,7 +42,7 @@ public class CardController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(cardService.newCard(newCard));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("something wrong happened, please try again later");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 }

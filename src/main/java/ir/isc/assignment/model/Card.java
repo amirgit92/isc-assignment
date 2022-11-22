@@ -5,38 +5,28 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-//@Setter
 @Getter
+@Setter
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"cardType", "customer_id", "issuer_id"})})
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String cardNumber;
-
     private CardType cardType;
-    private LocalDate expireDate;
+    private String expireDate;
     private boolean isActive;
 
-    @Transient
-    private String issuerNumber;
-    @Transient
-    private String issuerName;
-    @Transient
-    private String cardOwnerFirstName;
-    @Transient
-    private String cardOwnerLastName;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", nullable = false)
-
     private Customer owner;
 
     @ManyToOne
     @JoinColumn(name = "issuer_id", nullable = false)
-
     private Issuer issuer;
 }
