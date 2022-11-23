@@ -61,7 +61,7 @@ public class AssignmentApplication {
             Issuer issuer4 = new Issuer("sepah", "444444");
 
             Card card1 = Card.builder()
-                    .cardNumber("1234561234567890")
+                    .cardNumber("1111111234567890")
                     .cardType(CardType.credit)
                     .expireDate(setExpiryDate())
                     .isActive(true)
@@ -70,7 +70,7 @@ public class AssignmentApplication {
                     .build();
 
             Card card2 = Card.builder()
-                    .cardNumber("6543219876543210")
+                    .cardNumber("2222229876543210")
                     .cardType(CardType.credit)
                     .expireDate(setExpiryDate())
                     .isActive(true)

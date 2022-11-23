@@ -23,7 +23,7 @@ public class CardController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(cardService.getCard(cardNumber));
         } catch (Exception e) {
-            logger.warn("salam mohsen");
+            logger.error(("card number validation error"));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("card number is not valid");
         }
     }
@@ -33,6 +33,7 @@ public class CardController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomerCards(nationalNumber));
         } catch (Exception e) {
+            logger.error(("national number validation error"));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("national number is not valid");
         }
     }

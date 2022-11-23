@@ -8,6 +8,6 @@ import java.util.List;
 
 
 public interface CardService {
-    CardDTO getCard(String cardNumber);
+    CardDTO getCard(String cardNumber) throws Exception;
     Card newCard(Card newCard) throws Exception;
 }
