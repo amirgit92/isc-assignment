@@ -1,9 +1,6 @@
 package ir.isc.assignment.service;
 
-import ir.isc.assignment.model.Card;
-import ir.isc.assignment.model.CardDTO;
-import ir.isc.assignment.model.Customer;
-import ir.isc.assignment.model.Issuer;
+import ir.isc.assignment.model.*;
 import ir.isc.assignment.reopsitory.CardRepository;
 import ir.isc.assignment.reopsitory.CustomerRepository;
 import ir.isc.assignment.reopsitory.IssuerRepository;
@@ -39,7 +36,6 @@ public class CardServiceImp implements CardService {
         return cardDTO;
     }
 
-    // TODO: validating to be unique ard for unique customer
     @Override
     public Card newCard(Card card) throws Exception {
         String issuerName = card.getIssuer().getIssuerName();

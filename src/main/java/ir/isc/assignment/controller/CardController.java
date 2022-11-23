@@ -1,8 +1,11 @@
 package ir.isc.assignment.controller;
 
 import ir.isc.assignment.model.Card;
+import ir.isc.assignment.model.CardDTO;
+import ir.isc.assignment.model.RegisteringNewCardDTO;
 import ir.isc.assignment.service.CardService;
 import ir.isc.assignment.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class CardController {
     CardService cardService;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ModelMapper modelMapper;
     @GetMapping("/get")
     private ResponseEntity<?> getCard(@RequestParam String cardNumber) {
         try {
@@ -39,11 +44,14 @@ public class CardController {
     }
 
     @PostMapping("/new")
-    private ResponseEntity<?> newCard(@RequestBody Card newCard) {
+    private ResponseEntity<?> newCard(@RequestBody RegisteringNewCardDTO registeringNewCardDTO) throws Exception {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(cardService.newCard(newCard));
+            Card newCard = modelMapper.map(registeringNewCardDTO,Card.class);
+            newCard = cardService.newCard(newCard);
+            CardDTO cardDto = modelMapper.map(newCard, CardDTO.class);
+            return ResponseEntity.status(HttpStatus.OK).body(cardDto);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("card creation failed!");
         }
     }
 }
