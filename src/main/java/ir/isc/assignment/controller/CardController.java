@@ -13,6 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("api/card")
 public class CardController {
@@ -36,7 +39,10 @@ public class CardController {
     @GetMapping("/get-all")
     private ResponseEntity<?> getCustomerCards(@RequestParam String nationalNumber) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomerCards(nationalNumber));
+            List<Card> cards = customerService.getCustomerCards(nationalNumber);
+            List<CardDTO> cardDTOS = cards.stream().map(card->modelMapper.map(card,CardDTO.class))
+                    .collect(Collectors.toList());
+            return ResponseEntity.status(HttpStatus.OK).body(cardDTOS);
         } catch (Exception e) {
             logger.error(("national number validation error"));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("national number is not valid");
