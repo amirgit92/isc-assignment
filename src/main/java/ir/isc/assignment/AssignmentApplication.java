@@ -1,5 +1,6 @@
 package ir.isc.assignment;
 
+import ir.isc.assignment.controller.CardController;
 import ir.isc.assignment.memory_statistic.MemoryUsage;
 import ir.isc.assignment.model.Card;
 import ir.isc.assignment.model.CardType;
@@ -29,8 +30,8 @@ public class AssignmentApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AssignmentApplication.class, args);
-//        MemoryUsage memoryUsage = new MemoryUsage("memory usage thread");
-//        memoryUsage.start();
+        MemoryUsage memoryUsage = new MemoryUsage("memory usage thread");
+        memoryUsage.start();
     }
 
     @Bean
