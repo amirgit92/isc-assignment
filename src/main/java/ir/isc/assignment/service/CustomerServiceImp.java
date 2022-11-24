@@ -35,15 +35,4 @@ public class CustomerServiceImp implements CustomerService {
         }
         return cards;
     }
-
-    @Override
-    public Customer getCustomer(String nationalNumber) {
-        return customerRepository.findByNationalNumber(nationalNumber);
-    }
-
-    @Override
-    public Customer newCustomer(String nationalNumber, String firstName, String lastName, String phoneNumber, String address, String accountNumber) {
-        Customer newCustomer = new Customer(nationalNumber, firstName, lastName, phoneNumber, address, accountNumber);
-        return customerRepository.save(newCustomer);
-    }
 }

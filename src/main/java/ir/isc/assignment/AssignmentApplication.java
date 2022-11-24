@@ -1,6 +1,5 @@
 package ir.isc.assignment;
 
-import ir.isc.assignment.controller.CardController;
 import ir.isc.assignment.memory_statistic.MemoryUsage;
 import ir.isc.assignment.model.Card;
 import ir.isc.assignment.model.CardType;
@@ -17,8 +16,6 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
-import java.util.Random;
 
 @SpringBootApplication
 public class AssignmentApplication {
@@ -100,6 +97,4 @@ public class AssignmentApplication {
         LocalDate expiryDate = currentDate.plusYears(5);
         return expiryDate.format(formatter);
     }
-
-
 }
